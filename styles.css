@@ -1,0 +1,49 @@
+/* ==========================================================
+   LexMatch - Estilos base
+   ========================================================== */
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    overscroll-behavior: none;
+  }
+
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==========================================================
+   Navegación por anclas
+   El header es `fixed` y mide h-20 (5rem). Sin este margen,
+   al saltar a un ancla el título de la sección queda tapado
+   por el header. 6rem = 5rem del header + aire.
+   ========================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Accesibilidad: respetar a quien pide menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="LexMatch: recomendador de estudios jurídicos. Encontrá el estudio jurídico indicado para tu caso en minutos." />
+  <title>LexMatch | Plataforma Jurídica de Alto Nivel</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" />
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Tailwind (CDN) + configuracion del design system -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script
+    id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "outline": "#75777d", "background": "#f7f9fb", "surface-container": "#eceef0", "on-primary-fixed": "#0e1c2f", "on-tertiary-container": "#c76c00", "on-secondary-container": "#3b5a7f", "tertiary-fixed": "#ffdcc3", "error-container": "#ffdad6", "primary": "#000000", "on-secondary-fixed-variant": "#29486d", "error": "#ba1a1a", "surface-bright": "#f7f9fb", "inverse-on-surface": "#eff1f3", "on-tertiary-fixed-variant": "#6e3900", "surface": "#f7f9fb", "on-secondary": "#ffffff", "on-primary-container": "#77849c", "on-primary-fixed-variant": "#3a475c", "tertiary-container": "#2f1500", "on-primary": "#ffffff", "inverse-primary": "#bac7e1", "secondary-container": "#b3d1fd", "outline-variant": "#c5c6cd", "on-background": "#191c1e", "on-surface": "#191c1e", "secondary": "#426086", "on-error-container": "#93000a", "on-error": "#ffffff", "on-tertiary-fixed": "#2f1500", "surface-container-lowest": "#ffffff", "secondary-fixed-dim": "#aac9f4", "surface-container-high": "#e6e8ea", "on-surface-variant": "#44474c", "tertiary-fixed-dim": "#ffb77d", "secondary-fixed": "#d3e4ff", "on-tertiary": "#ffffff", "surface-container-low": "#f2f4f6", "surface-dim": "#d8dadc", "surface-variant": "#e0e3e5", "primary-fixed-dim": "#bac7e1", "surface-container-highest": "#e0e3e5", "tertiary": "#000000", "on-secondary-fixed": "#001c38", "primary-container": "#0e1c2f", "surface-tint": "#525f75", "inverse-surface": "#2d3133", "primary-fixed": "#d6e3fe" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter": "1.5rem", "margin": "3rem", "gutter-mobile": "1rem", "space-md": "1rem", "space-xl": "2.5rem", "margin-mobile": "1.25rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem" }, "fontFamily": { "label-caps": ["Inter"], "headline-lg": ["Plus Jakarta Sans"], "body-md": ["Inter"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "display-hero": ["Plus Jakarta Sans"], "body-sm": ["Inter"], "headline-md": ["Plus Jakarta Sans"], "label-md": ["Inter"], "body-lg": ["Inter"], "display-hero-mobile": ["Plus Jakarta Sans"], "label-sm": ["Inter"] }, "fontSize": { "label-caps": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-sm": ["13px", { "lineHeight": "20px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.025em", "fontWeight": "600" }] } } } };</script>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen">
+  <header
+    class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-20 max-w-[1280px] mx-auto px-gutter flex items-center justify-between gap-space-lg">
+      <div class="flex items-center gap-space-lg flex-1"><a class="flex items-center gap-space-sm group ml-space-sm"
+          data-path="inicio" href="#inicio">
+          <div
+            class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shadow-[0_1px_3px_rgba(11,25,44,0.05)]">
+            <span class="material-symbols-outlined text-tertiary-fixed-dim text-[22px]">balance</span>
+          </div>
+          <div class="flex flex-col"><span
+              class="font-headline-sm text-headline-sm tracking-tight text-primary leading-none">TU<span
+                class="text-secondary">ABOGADO</span></span><span
+              class="font-label-caps text-label-caps text-on-tertiary-container uppercase tracking-wider mt-0.5">DE
+              CONFIANZA</span></div>
+        </a>
+        <nav class="hidden lg:flex items-center gap-space-xs ml-auto"
+          data-active-classes="bg-surface-container-high text-on-surface font-semibold rounded-lg"><a
+            class="px-space-md py-space-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors rounded-lg"
+            data-path="como-funciona" href="#como-funciona">Cómo funciona</a><a
+            class="px-space-md py-space-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors rounded-lg"
+            data-path="garantia-de-confidencialidad" href="#garantia-de-confidencialidad">Garantía de
+            Confidencialidad</a><a
+            class="px-space-md py-space-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors rounded-lg"
+            data-path="especialidades" href="#especialidades">Especialidades</a><!-- QUITADO DEL MENU (sin seccion en la pagina). Reactivar borrando este comentario. <a
+            class="px-space-md py-space-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors rounded-lg"
+            data-path="sobre-nosotros" href="#">Sobre nosotros</a> --></nav>
+      </div>
+      <!-- QUITADO DEL MENU (sin seccion en la pagina). Reactivar borrando este comentario. <a
+          class="hidden sm:inline-flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-space-md py-space-sm transition-colors"
+          data-path="estudios-asociados" href="#">Estudios Asociados</a> --><!-- QUITADO DEL MENU (sin seccion en la pagina). Reactivar borrando este comentario. <a
+          class="inline-flex items-center justify-center bg-primary-container hover:bg-on-primary-fixed-variant text-on-primary px-space-lg py-space-sm font-label-md text-label-md rounded-lg shadow-[0_1px_3px_rgba(11,25,44,0.05)] transition-all duration-150"
+          data-path="contacto-directo" href="#">Contacto
+          directo</a> --><!-- COMENTADO: boton de iniciar sesion (icono personita). Reactivar borrando este comentario. --><!-- <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div> -->
+      <a class="inline-flex items-center gap-space-xs bg-primary-container hover:bg-on-primary-fixed-variant text-on-primary px-space-lg py-space-sm font-label-md text-label-md rounded-lg shadow-[0_1px_3px_rgba(11,25,44,0.05)] transition-all duration-150"
+        data-path="asistente" href="#inicio" aria-label="Consultar al asistente"><span
+          class="material-symbols-outlined text-[18px]">forum</span>Consultar al asistente</a>
+    </div>
+  </header>
+  <main class="w-full pt-20 bg-surface min-h-[calc(100vh-160px)]">
+    <div class="flex flex-col w-full">
+      <!-- COMENTADO: Top Trust & Protocol Marquee Bar. Reactivar borrando este comentario. -->
+      <!--
+<section class="w-full bg-primary-container text-on-primary py-space-xs px-gutter border-none">
+<div class="max-w-[1280px] mx-auto flex items-center justify-between font-label-caps text-label-caps tracking-wider">
+<div class="flex items-center gap-space-md">
+<span class="inline-flex items-center gap-1.5 text-tertiary-fixed-dim">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+          AUDITORÍA COLEGIAL ACTIVA 2026
+        </span>
+<span class="hidden md:inline text-on-primary-container">•</span>
+<span class="hidden md:inline text-surface-variant font-normal">SISTEMA CIFRADO CON RESGUARDO DE SECRETO PROFESIONAL</span>
+</div>
+<div class="flex items-center gap-space-lg text-surface-variant">
+<span>RESOLUCIÓN PROMEDIO: 48HS</span>
+<span class="text-tertiary-fixed">MATRÍCULAS VALIDAS: CABA, PBA &amp; FEDERAL</span>
+</div>
+</div>
+</section>
+-->
+      <!-- Hero & Legal Matchmaking Console -->
+      <section id="inicio"
+        class="relative w-full pt-space-xl pb-24 overflow-hidden bg-gradient-to-b from-surface via-surface-container-low/40 to-surface">
+        <!-- Ambient Graphic Geometry (Under strictly constrained layers) -->
+        <div
+          class="absolute top-0 right-1/4 w-[580px] h-[580px] bg-secondary-container/20 rounded-full blur-3xl pointer-events-none -z-0">
+        </div>
+        <div
+          class="absolute -bottom-10 left-10 w-[420px] h-[420px] bg-tertiary-fixed/30 rounded-full blur-3xl pointer-events-none -z-0">
+        </div>
+        <div class="max-w-[1280px] mx-auto px-gutter relative z-10">
+          <!-- Pre-headline & Main Statement -->
+          <div class="text-center max-w-4xl mx-auto mb-space-xl">
+            <div
+              class="hidden inline-flex items-center gap-space-xs px-space-md py-1 bg-surface-container-high rounded-full shadow-sm mb-space-md">
+              <span class="material-symbols-outlined text-[18px] text-secondary">verified</span>
+              <span class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider">Algoritmo Jurídico
+                Homologado • Nivel Corporativo</span>
+            </div>
+            <h1 class="font-headline-lg text-headline-lg text-on-background tracking-tight">
+              Encontrá un estudio jurídico de confianza en minutos
+            </h1>
+            <p class="mt-space-md font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+              Filtramos y vinculamos de forma inmediata con los estudios líderes más reputados según la naturaleza,
+              jurisdicción y complejidad de tu asunto legal, totalmente gratis.
+            </p>
+            <!-- Trust Badges Row -->
+            <div class="mt-space-lg flex flex-wrap items-center justify-center gap-space-md text-on-surface">
+              <span
+                class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-container-lowest shadow-sm font-label-md text-label-md">
+                <span class="material-symbols-outlined text-secondary text-[18px]">verified_user</span> Estudios 100%
+                verificados
+              </span>
+              <span
+                class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-container-lowest shadow-sm font-label-md text-label-md">
+                <span class="material-symbols-outlined text-secondary text-[18px]">lock</span> 100% Confidencial y sin
+                costo inicial
+              </span>
+              <span
+                class="inline-flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-container-lowest shadow-sm font-label-md text-label-md">
+                <span class="material-symbols-outlined text-secondary text-[18px]">handshake</span> +12.400 derivaciones
+                exitosas
+              </span>
+            </div>
+          </div>
+          <!-- MAIN INTERACTIVE COMPONENT -->
+          <div class="max-w-3xl mx-auto">
+            <!-- Interactive Card Surface -->
+            <div
+              class="bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(11,25,44,0.07)] p-space-lg md:p-space-xl relative transition-all duration-300"
+              id="interactive-box">
+              <!-- STATE 1: Active Intake Form -->
+              <div class="flex flex-col gap-space-lg" id="form-state">
+                <!-- Assistant Identity Bar -->
+                <div
+                  class="flex items-center gap-space-md pb-space-md bg-surface-container-low/50 p-space-md rounded-lg">
+                  <div class="relative flex-shrink-0">
+                    <div
+                      class="w-12 h-12 rounded-lg bg-primary-container text-on-primary flex items-center justify-center shadow-md">
+                      <span class="material-symbols-outlined text-[26px] text-tertiary-fixed-dim">psychology_alt</span>
+                    </div>
+                    <div
+                      class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full flex items-center justify-center ring-2 ring-white">
+                      <span class="w-2 h-2 rounded-full bg-white"></span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-2">
+                      <span class="font-headline-sm text-headline-sm text-on-surface">Asistente Legal Inteligente</span>
+                      <!-- COMENTADO: badge "IA V4.2 JURIDICA" (pastilla del asistente). Reactivar borrando este comentario. --><!-- <span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-caps text-label-caps">IA V4.2 JURÍDICA</span> -->
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">
+                      Hola, soy tu asistente legal. Te ayudo a buscar un estudio de abogacía de confianza enfocado en
+                      tus necesidades específicas.
+                    </p>
+                  </div>
+                </div>
+                <!-- Quick Category Pill Selector -->
+                <div class="flex flex-col gap-space-xs">
+                  <label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-secondary text-[18px]">quickreply</span>
+                    ¿En qué podemos ayudarte hoy?
+                  </label>
+                  <div class="flex flex-wrap gap-2 pt-1">
+                    <button
+                      class="quick-pill px-3 py-1.5 rounded-md bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-all"
+                      data-fill="Necesito asesoramiento prioritario por un despido injustificado y reclamo de indemnización laboral correspondiente."
+                      type="button">
+                      💼 Despido laboral
+                    </button>
+                    <button
+                      class="quick-pill px-3 py-1.5 rounded-md bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-all"
+                      data-fill="Tuve un accidente de tránsito en vía pública y necesito patrocinio para demandar ante la compañía de seguros por daños materiales y lesiones físicas."
+                      type="button">
+                      🚗 Accidente de tránsito
+                    </button>
+                    <button
+                      class="quick-pill px-3 py-1.5 rounded-md bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-all"
+                      data-fill="Requiero asistencia letrada para gestionar una demanda de divorcio vincular, régimen de comunicación y división de bienes conyugales."
+                      type="button">
+                      ⚖️ Divorcio y Familia
+                    </button>
+                    <button
+                      class="quick-pill px-3 py-1.5 rounded-md bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-all"
+                      data-fill="Necesito iniciar la declaratoria de herederos y tramitar la sucesión de bienes de un familiar fallecido."
+                      type="button">
+                      🏢 Sucesiones y herencias
+                    </button>
+                    <button
+                      class="quick-pill px-3 py-1.5 rounded-md bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-all"
+                      data-fill="Buscamos estructuración de contratos societarios, pacto de socios y revisión de acuerdos comerciales para empresa en expansión."
+                      type="button">
+                      📜 Contratos comerciales
+                    </button>
+                  </div>
+                </div>
+                <!-- Free Text Description Area -->
+                <div class="flex flex-col gap-space-xs">
+                  <div class="flex justify-between items-center">
+                    <label class="font-label-md text-label-md text-on-surface font-semibold" for="case-description">
+                      Detalles del caso o consulta
+                    </label>
+                    <span class="hidden font-body-sm text-body-sm text-on-surface-variant" id="char-hint">Privacidad
+                      blindada</span>
+                  </div>
+                  <textarea
+                    class="w-full p-space-md rounded-lg bg-surface text-on-surface placeholder:text-outline text-body-md font-body-md focus:bg-surface-container-lowest focus:shadow-md transition-all resize-none shadow-inner"
+                    id="case-description"
+                    placeholder="Describe brevemente tu situación o consulta legal (ej: Necesito asesoramiento para un reclamo por despido injustificado o indemnización por accidente)..."
+                    rows="4"></textarea>
+                  <div class="hidden text-error font-body-sm text-body-sm items-center gap-1 mt-1" id="validation-msg">
+                    <span class="material-symbols-outlined text-[16px]">error</span> Por favor, agrega unas palabras
+                    sobre tu caso para encontrar el estudio adecuado.
+                  </div>
+                </div>
+                <!-- Filter Attributes (Jurisdiction + Urgency) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+                  <div class="flex flex-col gap-1">
+                    <label class="font-label-sm text-label-sm text-on-surface font-semibold" for="jurisdiction-select">
+                      Jurisdicción / Localidad
+                    </label>
+                    <select
+                      class="h-11 px-3 rounded-lg bg-surface text-on-surface text-body-sm font-body-md shadow-sm focus:shadow-md"
+                      id="jurisdiction-select">
+                      <option value="CABA y GBA">Ciudad Autónoma de Buenos Aires / GBA</option>
+                      <option value="Provincia de Buenos Aires">Provincia de Buenos Aires (Interior)</option>
+                      <option value="Córdoba">Córdoba (Capital e Interior)</option>
+                      <option value="Santa Fe">Santa Fe / Rosario</option>
+                      <option value="Mendoza">Mendoza</option>
+                      <option value="Todo el país (Virtual)">Patrocinio Federal / Remoto nacional</option>
+                    </select>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label class="font-label-sm text-label-sm text-on-surface font-semibold">
+                      Plazo de atención deseado
+                    </label>
+                    <div class="flex items-center gap-2 h-11">
+                      <label
+                        class="flex-1 flex items-center justify-center gap-1.5 h-full px-2 rounded-lg bg-surface has-[:checked]:bg-primary-container has-[:checked]:text-on-primary cursor-pointer text-body-sm font-label-md transition-all shadow-sm">
+                        <input checked="" class="hidden" name="urgency" type="radio" value="Urgente" />
+                        <span class="material-symbols-outlined text-[16px] text-amber-500">bolt</span> Prioritaria (Hoy)
+                      </label>
+                      <label
+                        class="flex-1 flex items-center justify-center gap-1.5 h-full px-2 rounded-lg bg-surface has-[:checked]:bg-primary-container has-[:checked]:text-on-primary cursor-pointer text-body-sm font-label-md transition-all shadow-sm">
+                        <input class="hidden" name="urgency" type="radio" value="Estándar" />
+                        <span class="material-symbols-outlined text-[16px]">schedule</span> Estándar (24-48hs)
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- Primary Action CTA -->
+                <button
+                  class="w-full h-14 bg-primary text-on-primary rounded-lg font-headline-sm text-headline-sm flex items-center justify-center gap-space-sm shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] hover:-translate-y-0.5 active:translate-y-0 transition-all group"
+                  id="btn-search" type="button">
+                  <span
+                    class="material-symbols-outlined text-tertiary-fixed group-hover:scale-110 transition-transform">auto_awesome</span>
+                  Buscar estudio legal idóneo
+                  <span
+                    class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </button>
+                <!-- Legal Discretion Note -->
+                <div
+                  class="flex items-center justify-center gap-2 text-on-surface-variant font-label-sm text-label-sm text-center">
+                  <span class="material-symbols-outlined text-secondary text-[16px]">shield_person</span>
+                  Tu caso es evaluado bajo secreto profesional riguroso. Sin costo por la derivación.
+                </div>
+              </div>
+              <!-- STATE 2: AI Deep Scan Simulation (Initially Hidden) -->
+              <div class="hidden flex-col items-center justify-center py-space-xl text-center" id="analysis-state">
+                <!-- Pulsing Scanner Radar -->
+                <div class="relative w-32 h-32 flex items-center justify-center mb-space-lg">
+                  <div class="absolute inset-0 rounded-full bg-secondary-container/40 animate-ping opacity-75"></div>
+                  <div class="absolute inset-2 rounded-full bg-secondary-fixed/50 animate-pulse"></div>
+                  <div
+                    class="w-20 h-20 rounded-xl bg-primary-container flex items-center justify-center shadow-xl relative z-10">
+                    <span
+                      class="material-symbols-outlined text-[36px] text-tertiary-fixed-dim animate-bounce">gavel</span>
+                  </div>
+                  <!-- Rotating Ring -->
+                  <svg class="absolute inset-0 w-full h-full animate-spin text-secondary"
+                    style="animation-duration: 4s;" viewbox="0 0 100 100">
+                    <circle cx="50" cy="50" fill="none" r="46" stroke="currentColor" stroke-dasharray="25 75"
+                      stroke-width="4"></circle>
+                  </svg>
+                </div>
+                <!-- Scanning Indicator Text -->
+                <div class="max-w-md mx-auto">
+                  <div
+                    class="inline-block px-3 py-1 bg-surface-container rounded-full font-label-caps text-label-caps text-secondary mb-2">
+                    INDEXANDO REGISTRO NACIONAL DE MATRÍCULAS
+                  </div>
+                  <h3
+                    class="font-headline-sm text-headline-sm text-on-surface transition-all duration-300 min-h-[3.5rem] flex items-center justify-center"
+                    id="scan-status-text">
+                    Analizando la naturaleza de tu caso y materia legal...
+                  </h3>
+                  <!-- Progress Bar -->
+                  <div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden mt-space-md">
+                    <div class="bg-secondary h-full w-0 transition-all duration-300 ease-out" id="scan-progress-bar">
+                    </div>
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-3">
+                    Cotejando especialidad, tasa de éxito en sentencias y disponibilidad en tu zona.
+                  </p>
+                </div>
+              </div>
+              <!-- STATE 3: Match Result Dossier (Initially Hidden) -->
+              <div class="hidden flex-col gap-space-lg animate-fadeIn" id="result-state">
+                <!-- Congratulatory Badge -->
+                <div class="flex items-center gap-2 p-space-md rounded-lg bg-emerald-50 text-emerald-950 shadow-sm">
+                  <span class="material-symbols-outlined text-emerald-600 text-[24px]">verified</span>
+                  <div>
+                    <p class="font-headline-sm text-headline-sm text-emerald-900 leading-tight">¡Hemos encontrado la
+                      mejor opción para tu caso!</p>
+                    <p class="font-body-sm text-body-sm text-emerald-800">Coincidencia del 98.4% con los antecedentes
+                      aportados.</p>
+                  </div>
+                </div>
+                <!-- Matched Law Firm Card Details -->
+                <div
+                  class="p-space-lg rounded-xl bg-surface-container-low shadow-sm flex flex-col md:flex-row gap-space-lg items-start">
+                  <!-- Firm Visual / Seal -->
+                  <div
+                    class="w-full md:w-36 h-36 rounded-lg bg-primary-container text-on-primary flex-shrink-0 flex flex-col items-center justify-center text-center p-2 shadow-md">
+                    <span class="material-symbols-outlined text-[44px] text-tertiary-fixed-dim mb-1">apartment</span>
+                    <span class="font-label-caps text-label-caps text-on-primary-container uppercase">ESTUDIO TIER
+                      1</span>
+                    <span class="font-headline-sm text-headline-sm tracking-tight text-white mt-1"
+                      id="res-firm-initials">L&amp;A</span>
+                  </div>
+                  <!-- Main Firm Content -->
+                  <div class="flex-1 flex flex-col gap-2 min-w-0">
+                    <div class="flex flex-wrap items-center gap-2">
+                      <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-label-caps text-label-caps"
+                        id="res-specialty-badge">
+                        Civil, Laboral, Penal, Familia y Sucesiones
+                      </span>
+                      <span class="inline-flex items-center gap-2">
+                        <span
+                          class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-caps text-label-caps">
+                          MATRICULADO OFICIAL
+                        </span>
+                        <span
+                          class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-caps text-label-caps">
+                          VERIFICACIÓN 2026
+                        </span>
+                      </span>
+                    </div>
+                    <h3 class="font-headline-md text-headline-md text-on-background" id="res-firm-name">
+                      Estudio Jurídico Launes &amp; Asociados
+                    </h3>
+                    <!-- Meta Matrix -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 py-2">
+                      <div class="flex items-center gap-1.5 text-on-surface font-body-sm text-body-sm">
+                        <span class="material-symbols-outlined text-secondary text-[16px]">groups</span>
+                        <span>Equipo multidisciplinario</span>
+                      </div>
+                      <div class="flex items-center gap-1.5 text-on-surface font-body-sm text-body-sm">
+                        <span class="material-symbols-outlined text-secondary text-[16px]">location_on</span>
+                        <span id="res-location">Pilar / CABA</span>
+                      </div>
+                      <div class="flex items-center gap-1.5 text-on-surface font-body-sm text-body-sm">
+                        <span class="material-symbols-outlined text-secondary text-[16px]">domain</span>
+                        <span>Empresas y particulares</span>
+                      </div>
+                    </div>
+                    <!-- Explanation Why Matched -->
+                    <div class="p-3 bg-surface-container-lowest rounded-lg shadow-sm">
+                      <p class="font-body-sm text-body-sm text-on-surface-variant flex items-start gap-2">
+                        <span
+                          class="material-symbols-outlined text-secondary text-[18px] flex-shrink-0 mt-0.5">auto_awesome</span>
+                        <span><strong>Por qué es tu match ideal:</strong> <span id="res-match-reason">Estudio con equipo
+                            multidisciplinario y sedes en Pilar y CABA, con atención directa del titular y asesoramiento
+                            a
+                            empresas y particulares.</span></span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Match Actions -->
+                <div class="flex flex-col sm:flex-row gap-space-md pt-2">
+                  <!-- Conversion WhatsApp Direct Button -->
+                  <a class="flex-1 h-14 bg-[#25D366] hover:bg-[#1EBE5D] text-white rounded-lg font-headline-sm text-headline-sm flex items-center justify-center gap-3 shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:shadow-[0_8px_24px_rgba(37,211,102,0.45)] hover:-translate-y-0.5 transition-all text-center px-4"
+                    href="https://wa.me/5491124502746?text=Hola,%20me%20comunico%20v%C3%ADa%20LexMatch%20para%20realizar%20una%20consulta%20legal."
+                    id="res-whatsapp-btn" rel="noopener noreferrer" target="_blank">
+                    <!-- Inline SVG WhatsApp logo (path oficial de marca) -->
+                    <svg class="w-6 h-6 fill-current flex-shrink-0" viewbox="0 0 24 24" aria-hidden="true"
+                      focusable="false">
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488z">
+                      </path>
+                    </svg>
+                    <span>Contactar por WhatsApp ahora</span>
+                  </a>
+                  <!-- Reset / Search Again Button -->
+                  <button
+                    class="px-space-lg h-14 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 transition-all shadow-sm"
+                    id="btn-reset" type="button">
+                    <span class="material-symbols-outlined text-[18px]">replay</span>
+                    Buscar otro especialista
+                  </button>
+                </div>
+                <!-- Guarantee Footer -->
+                <p class="font-body-sm text-body-sm text-on-surface-variant text-center">
+                  Recibirás atención directa del titular o socio principal del estudio vinculado. Sin intermediarios
+                  comerciales.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section: Cómo Funciona (Methodology) -->
+      <section id="como-funciona" class="w-full py-space-xl bg-surface-container-lowest">
+        <div class="max-w-[1280px] mx-auto px-gutter">
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-4">
+            <div>
+              <span
+                class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2">Protocolo de
+                Derivación</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface">Cómo funciona LexMatch</h2>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+              Un proceso ágil y transparente diseñado para resolver tu urgencia legal conectándote con profesionales con
+              matrícula al día y experiencia comprobada.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+            <!-- Step 1 -->
+            <div
+              class="p-space-lg rounded-xl bg-surface-container-low flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+              <div
+                class="absolute top-0 right-0 p-space-md opacity-10 font-headline-lg text-headline-lg font-black group-hover:opacity-20 transition-opacity">
+                01
+              </div>
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-primary-container text-tertiary-fixed-dim flex items-center justify-center mb-space-md">
+                  <span class="material-symbols-outlined text-[24px]">description</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">1. Describe tu caso</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Cuéntanos qué sucedió con total confidencialidad mediante nuestro asistente o seleccionando las
+                  etiquetas de especialidad requeridas.
+                </p>
+              </div>
+              <div class="mt-space-lg pt-space-md bg-surface-container/60 -mx-space-lg -mb-space-lg px-space-lg py-2">
+                <span class="font-label-sm text-label-sm text-secondary font-bold">100% Cifrado y sin cargo</span>
+              </div>
+            </div>
+            <!-- Step 2 -->
+            <div
+              class="p-space-lg rounded-xl bg-surface-container-low flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+              <div
+                class="absolute top-0 right-0 p-space-md opacity-10 font-headline-lg text-headline-lg font-black group-hover:opacity-20 transition-opacity">
+                02
+              </div>
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-primary-container text-tertiary-fixed-dim flex items-center justify-center mb-space-md">
+                  <span class="material-symbols-outlined text-[24px]">troubleshoot</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">2. Seleccionamos el estudio idóneo
+                </h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Nuestro algoritmo califica especialización temática, tasa de sentencias favorables, antecedentes y
+                  cercanía a tu jurisdicción.
+                </p>
+              </div>
+              <div class="mt-space-lg pt-space-md bg-surface-container/60 -mx-space-lg -mb-space-lg px-space-lg py-2">
+                <span class="font-label-sm text-label-sm text-secondary font-bold">Evaluación en tiempo real</span>
+              </div>
+            </div>
+            <!-- Step 3 -->
+            <div
+              class="p-space-lg rounded-xl bg-surface-container-low flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+              <div
+                class="absolute top-0 right-0 p-space-md opacity-10 font-headline-lg text-headline-lg font-black group-hover:opacity-20 transition-opacity">
+                03
+              </div>
+              <div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-emerald-700 text-white flex items-center justify-center mb-space-md">
+                  <span class="material-symbols-outlined text-[24px]">chat</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">3. Contactas directo por WhatsApp
+                </h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Hablas en tiempo real con el equipo jurídico asignado. Sin intermediarios, sin comisiones ocultas y
+                  con atención inmediata.
+                </p>
+              </div>
+              <div class="mt-space-lg pt-space-md bg-surface-container/60 -mx-space-lg -mb-space-lg px-space-lg py-2">
+                <span class="font-label-sm text-label-sm text-emerald-800 font-bold">Respuesta en menos de 15
+                  minutos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section: Trust, Proof & Performance Metrics -->
+      <section class="w-full py-space-xl bg-surface-container-low">
+        <div class="max-w-[1280px] mx-auto px-gutter">
+          <!-- 4 Numeric Metric Indicators -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-space-md mb-space-xl">
+            <div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+              <span class="font-headline-lg text-headline-lg text-on-background font-bold tracking-tight">98.7%</span>
+              <span class="font-label-md text-label-md text-on-surface mt-1">Clientes satisfechos</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Encuestas post-resolución
+                verificadas</span>
+            </div>
+            <div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+              <span class="font-headline-lg text-headline-lg text-on-background font-bold tracking-tight">+14.500</span>
+              <span class="font-label-md text-label-md text-on-surface mt-1">Casos derivados</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Con patrocinio formal
+                efectivo</span>
+            </div>
+            <div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+              <span class="font-headline-lg text-headline-lg text-on-background font-bold tracking-tight">180+</span>
+              <span class="font-label-md text-label-md text-on-surface mt-1">Estudios auditados</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Solo firmas con matrícula al
+                día</span>
+            </div>
+            <div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+              <span class="font-headline-lg text-headline-lg text-secondary font-bold tracking-tight">&lt; 15 min</span>
+              <span class="font-label-md text-label-md text-on-surface mt-1">Tiempo de respuesta</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Contacto por canal WhatsApp</span>
+            </div>
+          </div>
+          <!-- Security & Privacy Banner -->
+          <div id="garantia-de-confidencialidad"
+            class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm mb-space-xl flex flex-col md:flex-row items-center gap-space-md">
+            <div
+              class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center flex-shrink-0 text-secondary">
+              <span class="material-symbols-outlined text-[28px]">policy</span>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-headline-sm text-headline-sm text-on-surface">Garantía de Confidencialidad y Secreto
+                Profesional</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant mt-1">
+                Toda información provista en la plataforma se encuentra protegida bajo la Ley N° 25.326 de Protección de
+                Datos Personales y amparada por las normas de ética y sigilo letrado impuestas por los Colegios Públicos
+                de Abogados.
+              </p>
+            </div>
+            <span
+              class="px-space-md py-2 bg-surface-container-high rounded text-on-surface font-label-caps text-label-caps whitespace-nowrap">
+              PROTOCOLO CUSTODIA CIFRADA
+            </span>
+          </div>
+          <!-- Real Client Testimonials Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+            <!-- Testimonial 1 -->
+            <div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-1 text-amber-500 mb-space-sm">
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface italic">
+                  "En menos de 10 minutos me asignaron a un estudio laboral de primera línea por un despido sorpresivo.
+                  Respondieron al instante por WhatsApp y conseguimos un acuerdo excelente sin ir a juicio desgastante."
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-space-sm mt-space-md pt-space-sm bg-surface-container-low/40 -mx-space-lg -mb-space-lg px-space-lg py-2">
+                <div
+                  class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">
+                  MR
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-on-surface">Martín Rodríguez</p>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">Reclamo Laboral • CABA</p>
+                </div>
+              </div>
+            </div>
+            <!-- Testimonial 2 -->
+            <div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-1 text-amber-500 mb-space-sm">
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface italic">
+                  "Mi familia necesitaba iniciar una sucesión compleja con propiedades en dos provincias. El asistente
+                  nos derivó con especialistas en sucesiones que resolvieron todo con transparencia absoluta."
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-space-sm mt-space-md pt-space-sm bg-surface-container-low/40 -mx-space-lg -mb-space-lg px-space-lg py-2">
+                <div
+                  class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">
+                  LG
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-on-surface">Luciana Gómez</p>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">Derecho Sucesorio • Santa Fe</p>
+                </div>
+              </div>
+            </div>
+            <!-- Testimonial 3 -->
+            <div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-1 text-amber-500 mb-space-sm">
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                  <span class="material-symbols-outlined text-[18px]">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface italic">
+                  "Tuve un choque en Panamericana y la aseguradora se desentendía. Gracias al abogado que me contactó
+                  por LexMatch cobré la indemnización íntegra sin poner un peso por adelantado."
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-space-sm mt-space-md pt-space-sm bg-surface-container-low/40 -mx-space-lg -mb-space-lg px-space-lg py-2">
+                <div
+                  class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">
+                  EF
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-on-surface">Esteban Fernández</p>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">Accidente de Tránsito • PBA</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section: Specialties Showcase Grid -->
+      <section id="especialidades" class="w-full py-space-xl bg-surface">
+        <div class="max-w-[1280px] mx-auto px-gutter">
+          <div class="text-center max-w-3xl mx-auto mb-space-xl">
+            <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest block mb-2">Áreas de
+              Práctica</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">Especialidades jurídicas cubiertas</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">
+              Estudios con dedicación exclusiva y trayectoria en litigios de alta exigencia para cada fuero procesal.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+            <!-- Spec 1: Laboral -->
+            <div
+              class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface mb-space-md">
+                  <span class="material-symbols-outlined text-[22px]">badge</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Derecho Laboral &amp; ART</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Despidos con o sin causa, trabajo no registrado, diferencias salariales, accidentes laborales,
+                  licencias y audiencias SECLO.
+                </p>
+              </div>
+              <!--
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-secondary font-label-md text-label-md">
+<span>+45 estudios activos</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+-->
+            </div>
+            <!-- Spec 2: Civil & Familia -->
+            <div
+              class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface mb-space-md">
+                  <span class="material-symbols-outlined text-[22px]">family_restroom</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Derecho Civil &amp; Familia</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Divorcios unilaterales y de común acuerdo, fijación de cuota alimentaria, régimen de comunicación,
+                  filiación y liquidación conyugal.
+                </p>
+              </div>
+              <!--
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-secondary font-label-md text-label-md">
+<span>+38 estudios activos</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+-->
+            </div>
+            <!-- Spec 3: Accidentes & Seguros -->
+            <div
+              class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface mb-space-md">
+                  <span class="material-symbols-outlined text-[22px]">car_crash</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Accidentes &amp; Seguros</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Siniestros viales, reclamos a aseguradoras, lesiones graves, incapacidades transitorias/permanentes y
+                  daño moral.
+                </p>
+              </div>
+              <!--
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-secondary font-label-md text-label-md">
+<span>+32 estudios activos</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+-->
+            </div>
+            <!-- Spec 4: Sucesiones -->
+            <div
+              class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface mb-space-md">
+                  <span class="material-symbols-outlined text-[22px]">real_estate_agent</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Sucesiones &amp; Herencias</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Juicios sucesorios ab-intestato y testamentarios, partición de herencias, inscripción de declaratorias
+                  y venta por tracto abreviado.
+                </p>
+              </div>
+              <!--
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-secondary font-label-md text-label-md">
+<span>+29 estudios activos</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+-->
+            </div>
+            <!-- Spec 5: Comercial & PYMES -->
+            <div
+              class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface mb-space-md">
+                  <span class="material-symbols-outlined text-[22px]">store</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Comercial &amp; Empresas</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Constitución de sociedades (SAS/SA/SRL), cobranzas ejecutivas, redacción contractual, acuerdos de
+                  confidencialidad y concursos.
+                </p>
+              </div>
+              <!--
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-secondary font-label-md text-label-md">
+<span>+26 estudios activos</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+-->
+            </div>
+            <!-- Spec 6: Penal & Delitos Económicos -->
+            <div
+              class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface mb-space-md">
+                  <span class="material-symbols-outlined text-[22px]">gavel</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Penal &amp; Litigios Complejos</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Defensas y querellas penales, eximiciones de prisión, delitos económicos, estafas informáticas y
+                  asistencia en indagatorias urgentes.
+                </p>
+              </div>
+              <!--
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-secondary font-label-md text-label-md">
+<span>+21 estudios activos</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+-->
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Final Reassurance Banner -->
+      <section class="w-full py-space-lg bg-surface-container-high text-on-surface">
+        <div
+          class="max-w-[1280px] mx-auto px-gutter flex flex-col sm:flex-row items-center justify-between gap-space-md text-center sm:text-left">
+          <div class="flex items-center gap-space-md">
+            <span class="material-symbols-outlined text-[32px] text-secondary">verified</span>
+            <div>
+              <h4 class="font-headline-sm text-headline-sm">¿Sos titular de un estudio jurídico colegiado?</h4>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">Sumate a la red institucional de derivaciones
+                tras pasar el proceso de auditoría y matriculación.</p>
+            </div>
+          </div>
+          <a class="px-space-lg py-space-sm bg-primary text-on-primary rounded-lg font-label-md text-label-md shadow-sm hover:shadow-md transition-all whitespace-nowrap"
+            href="#">
+            Postular estudio jurídico
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </main>
+  <footer class="w-full bg-surface-container-low shadow-[0_-1px_6px_rgba(0,0,0,0.02)]">
+    <div class="max-w-[1280px] mx-auto px-gutter py-space-xl flex flex-col gap-space-lg">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md pb-space-lg">
+        <div class="flex flex-wrap items-center gap-space-lg">
+          <div class="flex items-center gap-space-xs text-on-surface-variant"><span
+              class="material-symbols-outlined text-secondary text-[20px]">verified_user</span><span
+              class="font-label-sm text-label-sm font-semibold tracking-wide uppercase">Confidencialidad
+              Garantizada</span></div>
+          <div class="flex items-center gap-space-xs text-on-surface-variant"><span
+              class="material-symbols-outlined text-secondary text-[20px]">lock</span><span
+              class="font-label-sm text-label-sm font-semibold tracking-wide uppercase">Encriptación SSL 256-Bit</span>
+          </div>
+          <div class="flex items-center gap-space-xs text-on-surface-variant"><span
+              class="material-symbols-outlined text-secondary text-[20px]">gavel</span><span
+              class="font-label-sm text-label-sm font-semibold tracking-wide uppercase">Colegios de Abogados
+              Certificados</span></div>
+        </div>
+        <div class="flex flex-wrap items-center gap-space-lg font-label-sm text-label-sm text-on-surface-variant"><a
+            class="hover:text-on-surface transition-colors" data-path="terminos-y-condiciones" href="#">Términos y
+            Condiciones</a><a class="hover:text-on-surface transition-colors" data-path="politica-de-privacidad"
+            href="#">Política de Privacidad</a><a class="hover:text-on-surface transition-colors"
+            data-path="codigo-de-etica-profesional" href="#">Código de Ética Profesional</a></div>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm pt-space-md">
+        <p class="font-body-sm text-body-sm text-on-surface-variant text-center sm:text-left">© 2026 LexMatch Inc. Todos
+          los derechos reservados. Plataforma institucional de vinculación jurídica.</p>
+        <div class="flex items-center gap-space-sm text-on-surface-variant"><span
+            class="w-2 h-2 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm">Protocolo de
+            Custodia Cifrada</span></div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

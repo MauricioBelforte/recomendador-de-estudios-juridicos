@@ -1,0 +1,97 @@
+# =====================================================================
+#  LexMatch - recomendador de estudios juridicos
+#  Sitio estatico: no hay build ni dependencias, solo index.html,
+#  styles.css y script.js. Este archivo filtra lo que NO va al repo.
+# =====================================================================
+
+
+# --- Sistema operativo -----------------------------------------------
+# Archivos de Finder / Thumbs que genera Windows y macOS.
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+$RECYCLE.BIN/
+
+
+# --- Editores e IDE --------------------------------------------------
+# El proyecto se edita con VS Code, pero las preferencias son personales.
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+
+# --- Artefactos de pruebas -------------------------------------------
+# Scripts auxiliares de Playwright y capturas que se generan al validar
+# los cambios en el navegador. No forman parte de la aplicacion:
+# se recrean cuando hacen falta.
+_*.py
+_*.ps1
+__pycache__/
+.pytest_cache/
+.pytest-cache/
+*.spec.js
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# El sitio no carga imagenes externas (todo el arte es SVG inline y
+# Material Symbols por CDN), asi que cualquier .png es una captura
+# de trabajo, no un recurso del sitio.
+*.png
+
+
+# --- Archivo fuente de Stitch ---------------------------------------
+# Export original del diseno (~1,2 MB). El sitio ya esta reconstruido
+# a mano en index.html + styles.css + script.js, asi que el zip solo
+# suma peso. Si lo queres versionar:
+#   git add -f stitch_lexmatch_legal_finder_landing_page.zip
+stitch_lexmatch_legal_finder_landing_page.zip
+
+
+# --- Secretos y variables de entorno ---------------------------------
+# Nunca subir credenciales ni claves de API.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+
+# --- Node / empaquetado (por si se agrega herramienta despues) ------
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.cache/
+.vite/
+
+# --- Carpetas de build y despliegue ---------------------------------
+/dist/
+/build/
+/out/
+/public/
+*.min.css
+*.min.js
+*.map
+
+
+# --- Sistema de archivos temporal ------------------------------------
+Thumbs.db
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+~$*
